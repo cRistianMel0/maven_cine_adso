@@ -43,7 +43,7 @@ public class Salas extends javax.swing.JFrame {
 
         Barra_herramientas.setBackground(new java.awt.Color(15, 17, 26));
 
-        jButton1.setText("Pricncipal");
+        jButton1.setText("Principal");
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
