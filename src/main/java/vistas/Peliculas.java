@@ -69,6 +69,8 @@ public class Peliculas extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         txtFechaInicio1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
 
         jLabel7.setText("jLabel7");
 
@@ -196,6 +198,11 @@ public class Peliculas extends javax.swing.JFrame {
 
             }
         ));
+        tbListaPeliculas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbListaPeliculasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbListaPeliculas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -296,6 +303,15 @@ public class Peliculas extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("ID Pelicula");
+
+        txtId.setEnabled(false);
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -337,7 +353,11 @@ public class Peliculas extends javax.swing.JFrame {
                                     .addComponent(jButton5)
                                     .addComponent(btnCrearPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -377,7 +397,11 @@ public class Peliculas extends javax.swing.JFrame {
                     .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCrearPelicula)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
@@ -405,7 +429,7 @@ public class Peliculas extends javax.swing.JFrame {
                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -513,7 +537,21 @@ public class Peliculas extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
         }
+        cPeliculas.MostrarPeliculas(tbListaPeliculas);
     }//GEN-LAST:event_btnCrearPeliculaActionPerformed
+
+    private void tbListaPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaPeliculasMouseClicked
+        // TODO add your handling code here:
+        modeloPeliculas modelo =  new modeloPeliculas();
+        // TODO add your handling code here:
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        
+        cPeliculas.SeleccionarPeliculas(tbListaPeliculas, txtId, txtTitulo, intCosto, txtFechaInicio1, txtFechaFin, txtGenero, txtImagen);
+    }//GEN-LAST:event_tbListaPeliculasMouseClicked
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -572,6 +610,7 @@ public class Peliculas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -581,6 +620,7 @@ public class Peliculas extends javax.swing.JFrame {
     private javax.swing.JTextField txtFechaFin;
     private javax.swing.JTextField txtFechaInicio1;
     private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtImagen;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables

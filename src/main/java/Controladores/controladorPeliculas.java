@@ -77,6 +77,7 @@ public class controladorPeliculas {
         
         String sql = "";
         
+        modelo.addColumn("Id");
         modelo.addColumn("Titulo");
         modelo.addColumn("Autor");
         modelo.addColumn("Genero");
@@ -86,7 +87,7 @@ public class controladorPeliculas {
         paramTabalaPeliculas.setModel(modelo);
         
         sql = "SELECT * FROM peliculas";
-        String[] datos = new String[5];
+        String[] datos = new String[8];
         Statement st;
         
         try {
@@ -94,11 +95,12 @@ public class controladorPeliculas {
             ResultSet rs = st.executeQuery(sql);
             
             while(rs.next()){
-                datos[0]=rs.getString(2);
-                datos[1]=rs.getString(4);
-                datos[2]=rs.getString(5);
-                datos[3]=rs.getString(6);
-                datos[4]=rs.getString(7);
+                datos[0]=rs.getString(1);
+                datos[1]=rs.getString(2);
+                datos[2]=rs.getString(4);
+                datos[3]=rs.getString(5);
+                datos[4]=rs.getString(6);
+                datos[5]=rs.getString(7);
                 
                 modelo.addRow(datos);
             }
@@ -107,5 +109,23 @@ public class controladorPeliculas {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudieron mostrar los registros "+e);
         }
+    }
+    
+    public void SeleccionarPeliculas(JTable paramTablaPeliculas, JTextField paramId, JTextField paramTitulo, JTextField costoPelicula, JTextField fechaEstreno, JTextField fechaFin, JTextField genero, JTextField Imagen){
+        try {
+            int fila = paramTablaPeliculas.getSelectedRow();
+            
+            if(fila >= 0){
+                paramId.setText((String) (paramTablaPeliculas.getValueAt(fila, 0)));
+                paramTitulo.setText((String) (paramTablaPeliculas.getValueAt(fila, 1)));
+                fechaEstreno.setText((String) (paramTablaPeliculas.getValueAt(fila, 4)));
+                fechaFin.setText((String) (paramTablaPeliculas.getValueAt(fila, 5)));
+            }else{
+                JOptionPane.showMessageDialog(null, "FIla no seleccionada");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de seleccion: "+e);
+        }
+ 
     }
 }
