@@ -1,16 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.maven_cine;
 
+import vistas.Splash;
+
 /**
- *
+ * 
  * @author SENA
  */
 public class Maven_cine {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        // Crear una instancia de Splash
+        Splash.main(args);
     }
 }

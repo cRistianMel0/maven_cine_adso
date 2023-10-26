@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.maven_cine;
+package vistas;
 
+import App.Conexion;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDeepOceanContrastIJTheme;
 import javax.swing.UIManager;
@@ -20,6 +21,9 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         initStyles();
+        // Probar Conexion a base de datos
+        // Conexion objetoConexion = new Conexion();
+        // objetoConexion.establecerConexion();
     }
     
     public void initStyles(){ 
@@ -51,6 +55,7 @@ public class Dashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Fondo.setBackground(new java.awt.Color(31, 34, 51));
+        Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Barra_herramientas.setBackground(new java.awt.Color(15, 17, 26));
 
@@ -136,6 +141,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(183, Short.MAX_VALUE))
         );
 
+        Fondo.add(Barra_herramientas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         Enzabezado.setBackground(new java.awt.Color(24, 28, 42));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -149,7 +156,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(EnzabezadoLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jLabel2)
-                .addContainerGap(597, Short.MAX_VALUE))
+                .addContainerGap(609, Short.MAX_VALUE))
         );
         EnzabezadoLayout.setVerticalGroup(
             EnzabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,24 +166,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
-        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
-        Fondo.setLayout(FondoLayout);
-        FondoLayout.setHorizontalGroup(
-            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FondoLayout.createSequentialGroup()
-                .addComponent(Barra_herramientas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(FondoLayout.createSequentialGroup()
-                .addGap(291, 291, 291)
-                .addComponent(Enzabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        FondoLayout.setVerticalGroup(
-            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Barra_herramientas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(FondoLayout.createSequentialGroup()
-                .addComponent(Enzabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        Fondo.add(Enzabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 750, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
