@@ -32,6 +32,7 @@ com\mycompany\maven_cine\Maven_cine.class
 com\mycompany\maven_cine\DialogFecha.class
 vistas\Ingresos$11.class
 vistas\Salas$1.class
+vistas\Peliculas$18.class
 vistas\Ingresos$8.class
 vistas\Peliculas$8.class
 app\Conexion.class

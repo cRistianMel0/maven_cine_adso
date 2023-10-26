@@ -321,6 +321,11 @@ public class Peliculas extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -588,6 +593,15 @@ public class Peliculas extends javax.swing.JFrame {
         }
         cPeliculas.MostrarPeliculas(tbListaPeliculas);
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        modeloPeliculas modelo =  new modeloPeliculas();
+        // TODO add your handling code here:
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        cPeliculas.EliminarPeliculas(txtId);
+        cPeliculas.MostrarPeliculas(tbListaPeliculas);
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -175,5 +175,25 @@ public class controladorPeliculas {
         
     }
     
+    public void EliminarPeliculas(JTextField paramsId){
+        modelo.setId(Integer.parseInt(paramsId.getText()));
+        
+        String consulta = "DELETE FROM Peliculas Where id = ?";
+        
+        Conexion objetConexion = new Conexion();
+        
+        try {
+            CallableStatement cs = objetConexion.establecerConexion().prepareCall(consulta);
+            cs.setInt(1, modelo.getId());
+            
+            cs.execute();
+            
+            JOptionPane.showMessageDialog(null, "Se ha eliminado la pelicula correctamente!!!");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar la pelicula:"+e);
+        }
+    }
+    
     
 }
