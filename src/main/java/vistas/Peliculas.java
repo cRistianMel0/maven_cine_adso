@@ -4,7 +4,12 @@
  */
 package vistas;
 
+import Controladores.controladorPeliculas;
+import Modelos.modeloPeliculas;
 import com.mycompany.maven_cine.DialogFecha;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +22,10 @@ public class Peliculas extends javax.swing.JFrame {
      */
     public Peliculas() {
         initComponents();
+        modeloPeliculas modelo =  new modeloPeliculas();
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        cPeliculas.MostrarPeliculas(tbListaPeliculas);
+        
     }
 
     /**
@@ -50,13 +59,13 @@ public class Peliculas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         intCosto = new javax.swing.JTextField();
         txtTitulo = new javax.swing.JTextField();
-        txtFechaInicio = new javax.swing.JTextField();
+        txtGenero = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtFechaFin = new javax.swing.JTextField();
         txtAutor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
+        txtImagen = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         txtFechaInicio1 = new javax.swing.JTextField();
@@ -206,6 +215,11 @@ public class Peliculas extends javax.swing.JFrame {
         );
 
         btnCrearPelicula.setText("Crear");
+        btnCrearPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearPeliculaActionPerformed(evt);
+            }
+        });
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText(" Fecha Estreno");
@@ -231,9 +245,9 @@ public class Peliculas extends javax.swing.JFrame {
             }
         });
 
-        txtFechaInicio.addActionListener(new java.awt.event.ActionListener() {
+        txtGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaInicioActionPerformed(evt);
+                txtGeneroActionPerformed(evt);
             }
         });
 
@@ -258,8 +272,8 @@ public class Peliculas extends javax.swing.JFrame {
 
         jButton5.setText("Imagen");
 
-        jTextField4.setText("C:/img/accion/blade");
-        jTextField4.setEnabled(false);
+        txtImagen.setText("C:/img/accion/blade");
+        txtImagen.setEnabled(false);
 
         jButton6.setText("Agregar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -317,13 +331,13 @@ public class Peliculas extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtFechaInicio1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(txtFechaInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton5)
                                     .addComponent(btnCrearPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -356,11 +370,11 @@ public class Peliculas extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCrearPelicula)
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -451,9 +465,9 @@ public class Peliculas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaFinActionPerformed
 
-    private void txtFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicioActionPerformed
+    private void txtGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaInicioActionPerformed
+    }//GEN-LAST:event_txtGeneroActionPerformed
 
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
         // TODO add your handling code here:
@@ -469,9 +483,9 @@ public class Peliculas extends javax.swing.JFrame {
         jdia.setVisible(true);
         
         if(jdia.getBotonPulsado() == 1) {
-            txtFechaInicio.setText(jdia.getFechaCorta());
+            txtFechaInicio1.setText(jdia.getFechaCorta());
         } else {
-            txtFechaInicio.setText(null);
+            txtFechaInicio1.setText(null);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -489,6 +503,17 @@ public class Peliculas extends javax.swing.JFrame {
     private void txtFechaInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicio1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaInicio1ActionPerformed
+
+    private void btnCrearPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPeliculaActionPerformed
+        modeloPeliculas modelo =  new modeloPeliculas();
+        // TODO add your handling code here:
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        try {
+            cPeliculas.InsertarPelicula(txtTitulo, intCosto, txtAutor, txtFechaInicio1, txtFechaFin, txtGenero, txtImagen);
+        } catch (ParseException ex) {
+            Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnCrearPeliculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -551,12 +576,12 @@ public class Peliculas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable tbListaPeliculas;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtFechaFin;
-    private javax.swing.JTextField txtFechaInicio;
     private javax.swing.JTextField txtFechaInicio1;
+    private javax.swing.JTextField txtGenero;
+    private javax.swing.JTextField txtImagen;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

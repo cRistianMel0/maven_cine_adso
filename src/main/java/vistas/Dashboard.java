@@ -24,6 +24,7 @@ public class Dashboard extends javax.swing.JFrame {
         // Probar Conexion a base de datos
         // Conexion objetoConexion = new Conexion();
         // objetoConexion.establecerConexion();
+        
     }
     
     public void initStyles(){ 
