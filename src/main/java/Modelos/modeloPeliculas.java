@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class modeloPeliculas {
 
+    int id;
     String tituloPelicula;
     int costoEntrada;
     String autor;
@@ -19,6 +20,14 @@ public class modeloPeliculas {
     Date fechaInicio;
     Date fechaFin;
     String imagen;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public String getTituloPelicula() {
         return tituloPelicula;

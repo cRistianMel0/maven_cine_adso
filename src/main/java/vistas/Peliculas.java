@@ -25,7 +25,6 @@ public class Peliculas extends javax.swing.JFrame {
         modeloPeliculas modelo =  new modeloPeliculas();
         controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
         cPeliculas.MostrarPeliculas(tbListaPeliculas);
-        
     }
 
     /**
@@ -71,6 +70,8 @@ public class Peliculas extends javax.swing.JFrame {
         txtFechaInicio1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         jLabel7.setText("jLabel7");
 
@@ -211,8 +212,8 @@ public class Peliculas extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,6 +313,15 @@ public class Peliculas extends javax.swing.JFrame {
             }
         });
 
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -352,8 +362,15 @@ public class Peliculas extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton5)
                                     .addComponent(btnCrearPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(btnModificar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnEliminar))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -396,7 +413,10 @@ public class Peliculas extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnCrearPelicula)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearPelicula)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -418,7 +438,7 @@ public class Peliculas extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addGap(0, 40, Short.MAX_VALUE))
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -533,25 +553,41 @@ public class Peliculas extends javax.swing.JFrame {
         // TODO add your handling code here:
         controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
         try {
-            cPeliculas.InsertarPelicula(txtTitulo, intCosto, txtAutor, txtFechaInicio1, txtFechaFin, txtGenero, txtImagen);
+            cPeliculas.InsertarPelicula(txtTitulo, intCosto, txtFechaInicio1, txtFechaFin, txtGenero, txtImagen);
         } catch (ParseException ex) {
             Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
         }
         cPeliculas.MostrarPeliculas(tbListaPeliculas);
     }//GEN-LAST:event_btnCrearPeliculaActionPerformed
 
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
     private void tbListaPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaPeliculasMouseClicked
         // TODO add your handling code here:
         modeloPeliculas modelo =  new modeloPeliculas();
         // TODO add your handling code here:
         controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
-        
-        cPeliculas.SeleccionarPeliculas(tbListaPeliculas, txtId, txtTitulo, intCosto, txtFechaInicio1, txtFechaFin, txtGenero, txtImagen);
+
+        cPeliculas.SeleccionarPeliculas(tbListaPeliculas, txtId, txtTitulo, intCosto, txtAutor ,  txtFechaInicio1, txtFechaFin, txtGenero, txtImagen);
+        txtAutor.enable(false);
+        txtGenero.enable(false);
+        btnCrearPelicula.enable(false);
     }//GEN-LAST:event_tbListaPeliculasMouseClicked
 
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
+        modeloPeliculas modelo =  new modeloPeliculas();
+        // TODO add your handling code here:
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        try {
+            cPeliculas.ModificarPeliculas(txtId, txtTitulo, intCosto, txtFechaInicio1, txtFechaFin);
+        } catch (ParseException ex) {
+            Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cPeliculas.MostrarPeliculas(tbListaPeliculas);
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -593,6 +629,8 @@ public class Peliculas extends javax.swing.JFrame {
     private javax.swing.JPanel Enzabezado;
     private javax.swing.JPanel Fondo;
     private javax.swing.JButton btnCrearPelicula;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JTextField intCosto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

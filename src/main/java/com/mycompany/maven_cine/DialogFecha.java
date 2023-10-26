@@ -23,7 +23,7 @@ public class DialogFecha extends javax.swing.JDialog {
     public String getFechaCorta() {
         String fechaCorta;
         
-        fechaCorta = dia + "/" + mes + "/" + anio;
+        fechaCorta = dia + "-" + mes + "-" + anio;
         
         return fechaCorta;
     };
