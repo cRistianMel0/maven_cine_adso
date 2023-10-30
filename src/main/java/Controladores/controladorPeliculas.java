@@ -237,7 +237,7 @@ public void mostrarPeliculasPrincipal(JLabel paramsTitle, JLabel paramsGenero, J
             // Asignar los valores a los JLabel
             paramsTitle.setText(titulo);
             paramsGenero.setText("Género: " + genero);
-            paramsCosto.setText("Costo: " + costo);
+            paramsCosto.setText(""+ costo);
             paramsFechaInicio.setText("" + fechaInicio);
             paramsFechaFin.setText("" + fechaFin);
 

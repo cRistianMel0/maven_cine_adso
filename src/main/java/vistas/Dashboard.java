@@ -9,6 +9,8 @@ import Controladores.controladorPeliculas;
 import Modelos.modeloPeliculas;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDeepOceanContrastIJTheme;
+import com.mycompany.maven_cine.cine_adso;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -16,6 +18,9 @@ import javax.swing.UIManager;
  * @author SENA
  */
 public class Dashboard extends javax.swing.JFrame {
+
+    cine_adso salaPrincipal;
+    cine_adso salaSecundaria;
 
     /**
      * Creates new form Dashboard
@@ -26,16 +31,18 @@ public class Dashboard extends javax.swing.JFrame {
         modeloPeliculas modelo = new modeloPeliculas();
         // TODO add your handling code here:
         controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
-        
+
         cPeliculas.mostrarPeliculasPrincipal(Title1, genero1, precio1, fechaInicio1, fechaFin1, JLPeli1, 1);
         cPeliculas.mostrarPeliculasPrincipal(Title2, genero2, precio2, fechaInicio2, fechaFin2, JLPeli2, 2);
-        
+
+        salaPrincipal = new cine_adso();
+        salaSecundaria = new cine_adso();
     }
-    
-    public void initStyles(){ 
-        jLabel1.putClientProperty( "FlatLaf.styleClass", "h0" );
-        jLabel2.putClientProperty( "FlatLaf.styleClass", "h00" );
-        
+
+    public void initStyles() {
+        jLabel1.putClientProperty("FlatLaf.styleClass", "h0");
+        jLabel2.putClientProperty("FlatLaf.styleClass", "h00");
+
     }
 
     /**
@@ -47,6 +54,7 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton5 = new javax.swing.JButton();
         Fondo = new javax.swing.JPanel();
         Barra_herramientas = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -69,6 +77,23 @@ public class Dashboard extends javax.swing.JFrame {
         JLPeli2 = new javax.swing.JLabel();
         precio2 = new javax.swing.JLabel();
         Title2 = new javax.swing.JLabel();
+        vender1 = new javax.swing.JButton();
+        vender2 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        JLIngresos1 = new javax.swing.JLabel();
+        JLIngresos2 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+
+        jButton5.setBackground(new java.awt.Color(102, 102, 102));
+        jButton5.setFont(new java.awt.Font("Source Code Pro Black", 0, 14)); // NOI18N
+        jButton5.setText("Total ingresos");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5btnTotalIngresosActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,7 +170,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(EnzabezadoLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(693, Short.MAX_VALUE))
         );
         EnzabezadoLayout.setVerticalGroup(
             EnzabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,6 +234,60 @@ public class Dashboard extends javax.swing.JFrame {
         Title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title2.setText("TITULO");
 
+        vender1.setText("VENDER");
+        vender1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vender1ActionPerformed(evt);
+            }
+        });
+
+        vender2.setText("VENDER");
+        vender2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vender2ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("OCUPACION");
+        jButton2.setActionCommand("OCUPACION1");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("OCUPACION");
+        jButton4.setActionCommand("OCUPACION1");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        JLIngresos1.setText("Ocupación");
+
+        JLIngresos2.setText("Ocupación");
+
+        jButton6.setBackground(new java.awt.Color(102, 102, 102));
+        jButton6.setFont(new java.awt.Font("Source Code Pro Black", 0, 14)); // NOI18N
+        jButton6.setText("Total ingresos");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6btnTotalIngresosActionPerformed(evt);
+            }
+        });
+
+        jButton23.setBackground(new java.awt.Color(102, 102, 102));
+        jButton23.setFont(new java.awt.Font("Source Code Pro Black", 0, 14)); // NOI18N
+        jButton23.setText("VACIAR");
+        jButton23.setBorderPainted(false);
+        jButton23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
         Fondo.setLayout(FondoLayout);
         FondoLayout.setHorizontalGroup(
@@ -225,22 +304,30 @@ public class Dashboard extends javax.swing.JFrame {
                             .addGroup(FondoLayout.createSequentialGroup()
                                 .addGap(95, 95, 95)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(FondoLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JLPeli1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(FondoLayout.createSequentialGroup()
-                                        .addComponent(fechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(fechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(17, 17, 17))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
                                 .addGap(25, 25, 25)
-                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Title1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                    .addComponent(genero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(precio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(Title1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                                        .addComponent(genero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(precio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(FondoLayout.createSequentialGroup()
+                                            .addGap(7, 7, 7)
+                                            .addComponent(fechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(fechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(FondoLayout.createSequentialGroup()
+                                            .addGap(19, 19, 19)
+                                            .addComponent(vender1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(45, 45, 45)
+                                            .addComponent(jButton2)))
+                                    .addComponent(JLPeli1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                                .addComponent(jButton23)
+                                .addGap(46, 46, 46)))
                         .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(FondoLayout.createSequentialGroup()
                                 .addGap(70, 70, 70)
@@ -248,15 +335,29 @@ public class Dashboard extends javax.swing.JFrame {
                             .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(JLPeli2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(FondoLayout.createSequentialGroup()
-                                    .addComponent(fechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(fechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(FondoLayout.createSequentialGroup()
+                                            .addGap(12, 12, 12)
+                                            .addComponent(vender2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(fechaFin2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(FondoLayout.createSequentialGroup()
+                                            .addGap(12, 12, 12)
+                                            .addComponent(jButton4))
+                                        .addComponent(fechaFin2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(17, 17, 17)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(Title2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(genero2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(precio2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(44, 44, 44))))
+                        .addGap(44, 44, 44))
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(JLIngresos1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JLIngresos2)
+                        .addGap(155, 155, 155))))
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,40 +365,51 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(FondoLayout.createSequentialGroup()
                 .addComponent(Enzabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(JLPeli1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(JLPeli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FondoLayout.createSequentialGroup()
-                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(FondoLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(JLPeli1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addComponent(Title1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(genero1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(precio1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(fechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(fechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton23)))
                     .addGroup(FondoLayout.createSequentialGroup()
-                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(FondoLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(JLPeli2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addComponent(Title2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(genero2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(1, 1, 1)
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(genero2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(precio2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(fechaFin2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(vender1)
+                    .addComponent(vender2)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JLIngresos1)
+                    .addComponent(JLIngresos2))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -326,13 +438,60 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void vender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vender1ActionPerformed
+        salaPrincipal.setPrecioEntrada(Integer.parseInt( precio1.getText()));
+        double sillasOcupadas = 1.0 + (salaPrincipal.getSillasOcupadas());
+        salaPrincipal.boleta();
+        JLIngresos1.setText(String.valueOf("Ocupación:" + sillasOcupadas));        // TODO add your handling code here:
+
+    }//GEN-LAST:event_vender1ActionPerformed
+
+    private void vender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vender2ActionPerformed
+        // TODO add your handling code here:
+        salaSecundaria.setPrecioEntrada(Integer.parseInt( precio2.getText()));
+        double sillasOcupadas = 1 + (salaSecundaria.getSillasOcupadas());
+        salaSecundaria.boleta();
+        JLIngresos2.setText(String.valueOf("Ocupación:" + sillasOcupadas));        // TODO add your handling code here:
+    }//GEN-LAST:event_vender2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int ocupacion = salaPrincipal.getSillasLibres();
+        JOptionPane.showMessageDialog(null, "Las sillas libres para ver esta pelicula son: " + (60 - ocupacion));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int ocupacion = salaSecundaria.getSillasLibres();
+        JOptionPane.showMessageDialog(null, "Las sillas libres para ver esta pelicula son: " + (90 - ocupacion));        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5btnTotalIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5btnTotalIngresosActionPerformed
+        // TODO add your handling code here:
+        double total;
+        total = salaPrincipal.getIngresosSala() + salaSecundaria.getIngresosSala();
+        JOptionPane.showMessageDialog(null, "El total de ingresos de las dos salas es de: " + total);
+    }//GEN-LAST:event_jButton5btnTotalIngresosActionPerformed
+
+    private void jButton6btnTotalIngresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6btnTotalIngresosActionPerformed
+        // TODO add your handling code here:
+        double total;
+        total = salaPrincipal.getIngresosSala() + salaSecundaria.getIngresosSala();
+        JOptionPane.showMessageDialog(null, "El total de ingresos de las dos salas es de: " + total);
+    }//GEN-LAST:event_jButton6btnTotalIngresosActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+        salaPrincipal.vaciarSala();
+        salaSecundaria.vaciarSala();
+    }//GEN-LAST:event_jButton23ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         FlatMaterialDeepOceanContrastIJTheme.setup();
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -345,8 +504,9 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra_herramientas;
     private javax.swing.JPanel Enzabezado;
-    private javax.swing.JPanel Enzabezado1;
     private javax.swing.JPanel Fondo;
+    private javax.swing.JLabel JLIngresos1;
+    private javax.swing.JLabel JLIngresos2;
     private javax.swing.JLabel JLPeli1;
     private javax.swing.JLabel JLPeli2;
     private javax.swing.JLabel Title1;
@@ -358,14 +518,20 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel genero1;
     private javax.swing.JLabel genero2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel precio1;
     private javax.swing.JLabel precio2;
+    private javax.swing.JButton vender1;
+    private javax.swing.JButton vender2;
     // End of variables declaration//GEN-END:variables
 }
