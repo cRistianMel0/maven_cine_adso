@@ -7,9 +7,21 @@ package vistas;
 import Controladores.controladorPeliculas;
 import Modelos.modeloPeliculas;
 import com.mycompany.maven_cine.DialogFecha;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -17,12 +29,12 @@ import java.util.logging.Logger;
  */
 public class Peliculas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Peliculas
-     */
+    private FileInputStream fis;
+    private int longitudBytes;
+
     public Peliculas() {
         initComponents();
-        modeloPeliculas modelo =  new modeloPeliculas();
+        modeloPeliculas modelo = new modeloPeliculas();
         controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
         cPeliculas.MostrarPeliculas(tbListaPeliculas);
     }
@@ -63,8 +75,6 @@ public class Peliculas extends javax.swing.JFrame {
         txtFechaFin = new javax.swing.JTextField();
         txtAutor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        txtImagen = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         txtFechaInicio1 = new javax.swing.JTextField();
@@ -72,6 +82,8 @@ public class Peliculas extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jl_guardarFoto = new javax.swing.JLabel();
 
         jLabel7.setText("jLabel7");
 
@@ -218,7 +230,7 @@ public class Peliculas extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -278,11 +290,6 @@ public class Peliculas extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText(" Genero");
 
-        jButton5.setText("Imagen");
-
-        txtImagen.setText("C:/img/accion/blade");
-        txtImagen.setEnabled(false);
-
         jButton6.setText("Agregar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,29 +334,26 @@ public class Peliculas extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Agregar Imagen");
+
+        jl_guardarFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_guardarFoto.setText("FOTO");
+        jl_guardarFoto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jl_guardarFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_guardarFotoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(intCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabel6)))
-                        .addGap(0, 3, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel11)
@@ -361,26 +365,41 @@ public class Peliculas extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtFechaInicio1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtFechaInicio1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(intCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton5)
-                                    .addComponent(btnCrearPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel6)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(btnModificar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnEliminar))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                    .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jl_guardarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(btnCrearPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(11, 11, 11)
+                                            .addComponent(btnModificar)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(btnEliminar))))))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,7 +416,7 @@ public class Peliculas extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -409,24 +428,26 @@ public class Peliculas extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(txtImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jl_guardarFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel12)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearPelicula)
                     .addComponent(btnModificar)
                     .addComponent(btnEliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
@@ -443,18 +464,21 @@ public class Peliculas extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 40, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Barra_herramientas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(FondoLayout.createSequentialGroup()
                 .addComponent(Enzabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -465,7 +489,9 @@ public class Peliculas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -474,7 +500,7 @@ public class Peliculas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         this.setVisible(false);
 
         Dashboard m = new Dashboard();
@@ -499,12 +525,77 @@ public class Peliculas extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         this.setVisible(false);
 
         Peliculas m = new Peliculas();
         m.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tbListaPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaPeliculasMouseClicked
+        // TODO add your handling code here:
+        modeloPeliculas modelo = new modeloPeliculas();
+        // TODO add your handling code here:
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+
+        cPeliculas.SeleccionarPeliculas(tbListaPeliculas, txtId, txtTitulo, intCosto, txtAutor ,  txtFechaInicio1, txtFechaFin, txtGenero);
+        txtAutor.enable(false);
+        txtGenero.enable(false);
+        btnCrearPelicula.enable(false); 
+    }//GEN-LAST:event_tbListaPeliculasMouseClicked
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        modeloPeliculas modelo = new modeloPeliculas();
+        // TODO add your handling code here:
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        cPeliculas.EliminarPeliculas(txtId);
+        cPeliculas.MostrarPeliculas(tbListaPeliculas);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+        modeloPeliculas modelo = new modeloPeliculas();
+        // TODO add your handling code here:
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        try {
+            cPeliculas.ModificarPeliculas(txtId, txtTitulo, intCosto, txtFechaInicio1, txtFechaFin);
+        } catch (ParseException ex) {
+            Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cPeliculas.MostrarPeliculas(tbListaPeliculas);
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void txtFechaInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicio1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaInicio1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        DialogFecha jdia = new DialogFecha(this, rootPaneCheckingEnabled);
+        jdia.setVisible(true);
+        if (jdia.getBotonPulsado() == 1) {
+            txtFechaFin.setText(jdia.getFechaCorta());
+        } else {
+            txtFechaFin.setText(null);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        DialogFecha jdia = new DialogFecha(this, rootPaneCheckingEnabled);
+        jdia.setVisible(true);
+
+        if (jdia.getBotonPulsado() == 1) {
+            txtFechaInicio1.setText(jdia.getFechaCorta());
+        } else {
+            txtFechaInicio1.setText(null);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void txtAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAutorActionPerformed
         // TODO add your handling code here:
@@ -526,82 +617,56 @@ public class Peliculas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_intCostoActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        DialogFecha jdia = new DialogFecha(this, rootPaneCheckingEnabled);
-        jdia.setVisible(true);
-        
-        if(jdia.getBotonPulsado() == 1) {
-            txtFechaInicio1.setText(jdia.getFechaCorta());
-        } else {
-            txtFechaInicio1.setText(null);
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        DialogFecha jdia = new DialogFecha(this, rootPaneCheckingEnabled);
-        jdia.setVisible(true);
-        if(jdia.getBotonPulsado() == 1) {
-            txtFechaFin.setText(jdia.getFechaCorta());
-        } else {
-            txtFechaFin.setText(null);
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void txtFechaInicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicio1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaInicio1ActionPerformed
-
     private void btnCrearPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPeliculaActionPerformed
-        modeloPeliculas modelo =  new modeloPeliculas();
-        // TODO add your handling code here:
-        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        ImageIcon icono = (ImageIcon) jl_guardarFoto.getIcon();
+        Image imagen = icono.getImage();
+        BufferedImage imagenBuffered = new BufferedImage(imagen.getWidth(null), imagen.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+        Graphics g = imagenBuffered.getGraphics();
+        g.drawImage(imagen, 0, 0, null);
+        g.dispose();
+
         try {
-            cPeliculas.InsertarPelicula(txtTitulo, intCosto, txtFechaInicio1, txtFechaFin, txtGenero, txtImagen);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(imagenBuffered, "png", bos);
+            byte[] bytesImagen = bos.toByteArray();
+
+            modeloPeliculas modelo = new modeloPeliculas();
+            controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+
+            // Pasa los parámetros, incluyendo los bytes de la imagen
+            cPeliculas.InsertarPelicula(txtTitulo, intCosto, txtAutor, txtFechaInicio1, txtFechaFin, txtGenero, bytesImagen);
+            cPeliculas.MostrarPeliculas(tbListaPeliculas);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         } catch (ParseException ex) {
-            Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-        cPeliculas.MostrarPeliculas(tbListaPeliculas);
     }//GEN-LAST:event_btnCrearPeliculaActionPerformed
 
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+    private void jl_guardarFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_guardarFotoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
+        JFileChooser se = new JFileChooser();
+        se.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int estado = se.showOpenDialog(null);
+        if (estado == JFileChooser.APPROVE_OPTION) {
+            try {
 
-    private void tbListaPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaPeliculasMouseClicked
-        // TODO add your handling code here:
-        modeloPeliculas modelo =  new modeloPeliculas();
-        // TODO add your handling code here:
-        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+                fis = new FileInputStream(se.getSelectedFile());
+                this.longitudBytes = (int) se.getSelectedFile().length();
+                Image icono = ImageIO.read(se.getSelectedFile()).getScaledInstance(jl_guardarFoto.getWidth(), jl_guardarFoto.getHeight(), Image.SCALE_DEFAULT);
+                jl_guardarFoto.setIcon(new ImageIcon(icono));
+                jl_guardarFoto.updateUI();
 
-        cPeliculas.SeleccionarPeliculas(tbListaPeliculas, txtId, txtTitulo, intCosto, txtAutor ,  txtFechaInicio1, txtFechaFin, txtGenero, txtImagen);
-        txtAutor.enable(false);
-        txtGenero.enable(false);
-        btnCrearPelicula.enable(false);
-    }//GEN-LAST:event_tbListaPeliculasMouseClicked
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-        modeloPeliculas modelo =  new modeloPeliculas();
-        // TODO add your handling code here:
-        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
-        try {
-            cPeliculas.ModificarPeliculas(txtId, txtTitulo, intCosto, txtFechaInicio1, txtFechaFin);
-        } catch (ParseException ex) {
-            Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("Error en el primer catch");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error en el segundo catch");
+            }
         }
-        cPeliculas.MostrarPeliculas(tbListaPeliculas);
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-        modeloPeliculas modelo =  new modeloPeliculas();
-        // TODO add your handling code here:
-        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
-        cPeliculas.EliminarPeliculas(txtId);
-        cPeliculas.MostrarPeliculas(tbListaPeliculas);
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_jl_guardarFotoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -650,12 +715,12 @@ public class Peliculas extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -667,13 +732,13 @@ public class Peliculas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel jl_guardarFoto;
     private javax.swing.JTable tbListaPeliculas;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtFechaFin;
     private javax.swing.JTextField txtFechaInicio1;
     private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtImagen;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

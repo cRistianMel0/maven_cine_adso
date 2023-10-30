@@ -19,7 +19,16 @@ public class modeloPeliculas {
     String genero;
     Date fechaInicio;
     Date fechaFin;
-    String imagen;
+    byte[] imagen;
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
 
     public void setId(int id) {
         this.id = id;
@@ -53,10 +62,6 @@ public class modeloPeliculas {
         return fechaFin;
     }
 
-    public String getImagen() {
-        return imagen;
-    }
-
     public void setTituloPelicula(String tituloPelicula) {
         this.tituloPelicula = tituloPelicula;
     }
@@ -80,9 +85,4 @@ public class modeloPeliculas {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
 }
