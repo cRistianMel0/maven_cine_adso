@@ -5,6 +5,8 @@
 package vistas;
 
 import App.Conexion;
+import Controladores.controladorPeliculas;
+import Modelos.modeloPeliculas;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDeepOceanContrastIJTheme;
 import javax.swing.UIManager;
@@ -21,9 +23,12 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         initStyles();
-        // Probar Conexion a base de datos
-        // Conexion objetoConexion = new Conexion();
-        // objetoConexion.establecerConexion();
+        modeloPeliculas modelo = new modeloPeliculas();
+        // TODO add your handling code here:
+        controladorPeliculas cPeliculas = new controladorPeliculas(modelo);
+        
+        cPeliculas.mostrarPeliculasPrincipal(Title1, genero1, precio1, fechaInicio1, fechaFin1, JLPeli1, 1);
+        cPeliculas.mostrarPeliculasPrincipal(Title2, genero2, precio2, fechaInicio2, fechaFin2, JLPeli2, 2);
         
     }
     
@@ -45,18 +50,29 @@ public class Dashboard extends javax.swing.JFrame {
         Fondo = new javax.swing.JPanel();
         Barra_herramientas = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         Enzabezado = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        JLPeli1 = new javax.swing.JLabel();
+        Title1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        genero1 = new javax.swing.JLabel();
+        precio1 = new javax.swing.JLabel();
+        fechaFin1 = new javax.swing.JLabel();
+        fechaInicio1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        genero2 = new javax.swing.JLabel();
+        fechaFin2 = new javax.swing.JLabel();
+        fechaInicio2 = new javax.swing.JLabel();
+        JLPeli2 = new javax.swing.JLabel();
+        precio2 = new javax.swing.JLabel();
+        Title2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Fondo.setBackground(new java.awt.Color(31, 34, 51));
-        Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Barra_herramientas.setBackground(new java.awt.Color(15, 17, 26));
 
@@ -66,24 +82,6 @@ public class Dashboard extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Salas");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Ingresos");
-        jButton4.setBorder(null);
-        jButton4.setBorderPainted(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
             }
         });
 
@@ -108,9 +106,7 @@ public class Dashboard extends javax.swing.JFrame {
         Barra_herramientasLayout.setHorizontalGroup(
             Barra_herramientasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Barra_herramientasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Barra_herramientasLayout.createSequentialGroup()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,20 +125,12 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Barra_herramientasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Barra_herramientasLayout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(Barra_herramientasLayout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Barra_herramientasLayout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        Fondo.add(Barra_herramientas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Enzabezado.setBackground(new java.awt.Color(24, 28, 42));
 
@@ -157,7 +145,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(EnzabezadoLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jLabel2)
-                .addContainerGap(609, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         EnzabezadoLayout.setVerticalGroup(
             EnzabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +155,150 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
-        Fondo.add(Enzabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 750, -1));
+        JLPeli1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLPeli1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        Title1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        Title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Title1.setText("TITULO");
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("SALA 1");
+
+        genero1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        genero1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        genero1.setText("GENERO");
+
+        precio1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        precio1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        precio1.setText("PRECIO");
+
+        fechaFin1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        fechaFin1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fechaFin1.setText("FECHA FIN");
+
+        fechaInicio1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        fechaInicio1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fechaInicio1.setText("FECHA INICIO");
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("SALA 2");
+
+        genero2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        genero2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        genero2.setText("GENERO");
+
+        fechaFin2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        fechaFin2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fechaFin2.setText("FECHA FIN");
+
+        fechaInicio2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        fechaInicio2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fechaInicio2.setText("FECHA INICIO");
+
+        JLPeli2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLPeli2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        precio2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        precio2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        precio2.setText("PRECIO");
+
+        Title2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        Title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Title2.setText("TITULO");
+
+        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
+        Fondo.setLayout(FondoLayout);
+        FondoLayout.setHorizontalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addComponent(Barra_herramientas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(Enzabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(JLPeli1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(FondoLayout.createSequentialGroup()
+                                        .addComponent(fechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(fechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(17, 17, 17))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Title1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                                    .addComponent(genero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(precio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(JLPeli2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(FondoLayout.createSequentialGroup()
+                                    .addComponent(fechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(fechaFin2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(17, 17, 17)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Title2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(genero2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(precio2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(44, 44, 44))))
+        );
+        FondoLayout.setVerticalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Barra_herramientas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addComponent(Enzabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(JLPeli1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(Title1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(genero1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(precio1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fechaFin1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(JLPeli2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(Title2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(genero2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(precio2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fechaFin2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechaInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(22, 22, 22))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,22 +321,6 @@ public class Dashboard extends javax.swing.JFrame {
         Peliculas m = new Peliculas();
         m.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-
-        Ingresos m = new Ingresos();
-        m.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-
-        Salas m = new Salas();
-        m.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -230,13 +345,27 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra_herramientas;
     private javax.swing.JPanel Enzabezado;
+    private javax.swing.JPanel Enzabezado1;
     private javax.swing.JPanel Fondo;
+    private javax.swing.JLabel JLPeli1;
+    private javax.swing.JLabel JLPeli2;
+    private javax.swing.JLabel Title1;
+    private javax.swing.JLabel Title2;
+    private javax.swing.JLabel fechaFin1;
+    private javax.swing.JLabel fechaFin2;
+    private javax.swing.JLabel fechaInicio1;
+    private javax.swing.JLabel fechaInicio2;
+    private javax.swing.JLabel genero1;
+    private javax.swing.JLabel genero2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel precio1;
+    private javax.swing.JLabel precio2;
     // End of variables declaration//GEN-END:variables
 }

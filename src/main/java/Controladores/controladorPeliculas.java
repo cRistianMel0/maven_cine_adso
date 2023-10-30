@@ -5,18 +5,23 @@ import javax.swing.JTextField;
 import Modelos.modeloPeliculas;
 import com.mysql.cj.protocol.Resultset;
 import com.sun.java.accessibility.util.SwingEventMonitor;
+import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import static java.lang.Integer.parseInt;
+import java.sql.Blob;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -33,56 +38,57 @@ public class controladorPeliculas {
         this.modelo = modelo;
     }
 
-public void InsertarPelicula(JTextField paramTitulo, JTextField costoPelicula, JTextField autor, JTextField fechaEstreno, JTextField fechaFin, JTextField genero, byte[] Imagen) throws ParseException {
-    modelo.setTituloPelicula(paramTitulo.getText());
-    modelo.setCostoEntrada(parseInt(costoPelicula.getText()));
+    public void InsertarPelicula(JTextField paramTitulo, JTextField costoPelicula, JTextField autor, JTextField fechaEstreno, JTextField fechaFin, JTextField genero, byte[] Imagen, JTextField sala) throws ParseException {
+        modelo.setTituloPelicula(paramTitulo.getText());
+        modelo.setCostoEntrada(parseInt(costoPelicula.getText()));
 
-    String fechaEstrenoText = fechaEstreno.getText();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Date fechaEstrenoDate = dateFormat.parse(fechaEstrenoText);
+        String fechaEstrenoText = fechaEstreno.getText();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaEstrenoDate = dateFormat.parse(fechaEstrenoText);
 
-    modelo.setFechaInicio(fechaEstrenoDate);
+        modelo.setFechaInicio(fechaEstrenoDate);
 
-    modelo.setAutor(autor.getText());
+        modelo.setAutor(autor.getText());
 
-    String fechaFinText = fechaFin.getText();
-    Date fechaFinDate = dateFormat.parse(fechaFinText);
+        String fechaFinText = fechaFin.getText();
+        Date fechaFinDate = dateFormat.parse(fechaFinText);
 
-    modelo.setFechaFin(fechaFinDate);
+        modelo.setFechaFin(fechaFinDate);
 
-    modelo.setGenero(genero.getText());
+        modelo.setGenero(genero.getText());
 
-    // Verifica si Imagen es nulo antes de intentar insertarlo
-    if (Imagen != null) {
-        modelo.setImagen(Imagen);
-    } else {
-        // Aquí puedes manejar el caso en el que Imagen es nulo
-        JOptionPane.showMessageDialog(null, "La imagen no puede ser nula.");
-        return; // Termina la ejecución del método
+        modelo.setSala(parseInt(sala.getText()));
+
+        // Verifica si Imagen es nulo antes de intentar insertarlo
+        if (Imagen != null) {
+            modelo.setImagen(Imagen);
+        } else {
+            // Aquí puedes manejar el caso en el que Imagen es nulo
+            JOptionPane.showMessageDialog(null, "La imagen no puede ser nula.");
+            return; // Termina la ejecución del método
+        }
+
+        Conexion objetConexion = new Conexion();
+
+        String consulta = ("INSERT INTO Peliculas (tituloPelicula, costoEntrada, autor, genero, fechaInicio, fechaFin, imagen, sala) VALUES  (?,?,?,?,?,?,?,?)");
+
+        try {
+            CallableStatement cs = objetConexion.establecerConexion().prepareCall(consulta);
+            cs.setString(1, modelo.getTituloPelicula());
+            cs.setInt(2, modelo.getCostoEntrada());
+            cs.setString(3, modelo.getAutor());
+            cs.setString(4, modelo.getGenero());
+            cs.setDate(5, new java.sql.Date(modelo.getFechaInicio().getTime()));
+            cs.setDate(6, new java.sql.Date(modelo.getFechaFin().getTime()));
+            cs.setBlob(7, new ByteArrayInputStream(Imagen), Imagen.length); // Asumiendo que Imagen es un arreglo de bytes válido
+            cs.setInt(8, modelo.getSala());
+            cs.execute();
+
+            JOptionPane.showMessageDialog(null, "Se insertó correctamente la pelicula");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Hubo un problema: " + e);
+        }
     }
-
-    Conexion objetConexion = new Conexion();
-
-    String consulta = ("INSERT INTO Peliculas (tituloPelicula, costoEntrada, autor, genero, fechaInicio, fechaFin, imagen) VALUES  (?,?,?,?,?,?,?)");
-
-    try {
-        CallableStatement cs = objetConexion.establecerConexion().prepareCall(consulta);
-        cs.setString(1, modelo.getTituloPelicula());
-        cs.setInt(2, modelo.getCostoEntrada());
-        cs.setString(3, modelo.getAutor());
-        cs.setString(4, modelo.getGenero());
-        cs.setDate(5, new java.sql.Date(modelo.getFechaInicio().getTime()));
-        cs.setDate(6, new java.sql.Date(modelo.getFechaFin().getTime()));
-        cs.setBlob(7, new ByteArrayInputStream(Imagen), Imagen.length); // Asumiendo que Imagen es un arreglo de bytes válido
-
-        cs.execute();
-
-        JOptionPane.showMessageDialog(null, "Se insertó correctamente la pelicula");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Hubo un problema: " + e);
-    }
-}
-
 
     public void MostrarPeliculas(JTable paramTabalaPeliculas) {
 
@@ -92,8 +98,6 @@ public void InsertarPelicula(JTextField paramTitulo, JTextField costoPelicula, J
 
         TableRowSorter<TableModel> OrdenarTabla = new TableRowSorter<TableModel>(modelo);
         paramTabalaPeliculas.setRowSorter(OrdenarTabla);
-
-        String sql = "";
 
         modelo.addColumn("Id");
         modelo.addColumn("Titulo");
@@ -105,8 +109,8 @@ public void InsertarPelicula(JTextField paramTitulo, JTextField costoPelicula, J
 
         paramTabalaPeliculas.setModel(modelo);
 
-        sql = "SELECT * FROM peliculas";
-        String[] datos = new String[8];
+        String sql = "SELECT * FROM peliculas";
+        String[] datos = new String[9];
         Statement st;
 
         try {
@@ -209,5 +213,43 @@ public void InsertarPelicula(JTextField paramTitulo, JTextField costoPelicula, J
             JOptionPane.showMessageDialog(null, "No se pudo eliminar la pelicula:" + e);
         }
     }
+
+public void mostrarPeliculasPrincipal(JLabel paramsTitle, JLabel paramsGenero, JLabel paramsCosto, JLabel paramsFechaInicio, JLabel paramsFechaFin, JLabel paramsImagen, int paramsSala) {
+    Conexion objectConexion = new Conexion();
+    int sala = paramsSala;
+    
+    String Consulta = "SELECT * FROM Peliculas WHERE sala = " + sala + " AND fechaInicio >= CURDATE() ORDER BY fechaInicio LIMIT 1;";
+    
+    try {
+        Connection conexion = objectConexion.establecerConexion();
+        Statement statement = conexion.createStatement();
+        ResultSet resultSet = statement.executeQuery(Consulta);
+
+        if (resultSet.next()) {
+            String titulo = resultSet.getString("tituloPelicula");
+            String genero = resultSet.getString("genero");
+            int costo = resultSet.getInt("costoEntrada");
+            Date fechaInicio = resultSet.getDate("fechaInicio");
+            Date fechaFin = resultSet.getDate("fechaFin");
+            Blob imagenBlob = resultSet.getBlob("imagen");
+            byte[] imagenBytes = imagenBlob.getBytes(1, (int) imagenBlob.length());
+
+            // Asignar los valores a los JLabel
+            paramsTitle.setText(titulo);
+            paramsGenero.setText("Género: " + genero);
+            paramsCosto.setText("Costo: " + costo);
+            paramsFechaInicio.setText("" + fechaInicio);
+            paramsFechaFin.setText("" + fechaFin);
+
+            // Escalar y mostrar la imagen en el JLabel
+            ImageIcon imagenIcon = new ImageIcon(imagenBytes);
+            Image imagen = imagenIcon.getImage().getScaledInstance(paramsImagen.getWidth(), paramsImagen.getHeight(), Image.SCALE_SMOOTH);
+            paramsImagen.setIcon(new ImageIcon(imagen));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
 
 }

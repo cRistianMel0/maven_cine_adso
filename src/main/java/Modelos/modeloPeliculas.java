@@ -20,6 +20,15 @@ public class modeloPeliculas {
     Date fechaInicio;
     Date fechaFin;
     byte[] imagen;
+    int sala;
+
+    public void setSala(int sala) {
+        this.sala = sala;
+    }
+
+    public int getSala() {
+        return sala;
+    }
 
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
